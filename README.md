@@ -280,7 +280,7 @@ This project includes both **unit tests** and **integration tests** to ensure re
 
 ---
 
-### ▶️ Run All Tests
+### Run All Tests
 
 ```bash
 PYTHONPATH=. pytest
@@ -288,7 +288,7 @@ PYTHONPATH=. pytest
 
 ---
 
-### 📊 Run Tests with Coverage
+### Run Tests with Coverage
 
 ```bash
 PYTHONPATH=. pytest --cov=app
@@ -296,7 +296,7 @@ PYTHONPATH=. pytest --cov=app
 
 ---
 
-### 📈 Current Coverage
+### Current Coverage
 
 ```text
 TOTAL: 85%
@@ -307,7 +307,7 @@ TOTAL: 85%
 
 ---
 
-### 📁 Test Structure
+### Test Structure
 
 ```text
 tests/
@@ -322,7 +322,7 @@ tests/
 
 ---
 
-### 🧠 Key Testing Concepts Used
+### Key Testing Concepts Used
 
 * Dependency Injection
 * Mocking repositories
@@ -332,7 +332,7 @@ tests/
 
 ---
 
-### ⚠️ Notes
+### Notes
 
 * Each test is **independent**
 * Unique data is used (UUID) to avoid conflicts
