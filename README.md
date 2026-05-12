@@ -243,23 +243,101 @@ Invited members can:
 
 ---
 
-# Testing
+## 🧪 Testing Guide
 
-* Run all tests
-* PYTHONPATH=. pytest
-* Run with coverage
-* PYTHONPATH=. pytest --cov=app
+This project includes both **unit tests** and **integration tests** to ensure reliability and correctness.
 
 ---
 
-# Test Coverage
+### 🔹 Test Types
 
-* Unit Tests → Service layer
-* Integration Tests → API endpoints
+#### 1. Unit Tests
 
-* Total Coverage: 85%
+* Focus on **business logic (service layer)**
+* Do NOT use real database
+* Use **mock/fake repositories**
+* Example:
+
+  * AuthService
+  * BoardService
+  * TicketService
 
 ---
+
+#### 2. Integration Tests
+
+* Test **full API flow**
+* Use FastAPI `TestClient`
+* Include:
+
+  * Register → Login → Token → API calls
+* Example:
+
+  * `/login`
+  * `/boards`
+  * `/sections`
+  * `/tickets`
+
+---
+
+### ▶️ Run All Tests
+
+```bash
+PYTHONPATH=. pytest
+```
+
+---
+
+### 📊 Run Tests with Coverage
+
+```bash
+PYTHONPATH=. pytest --cov=app
+```
+
+---
+
+### 📈 Current Coverage
+
+```text
+TOTAL: 85%
+```
+
+✔ Requirement: At least 50%
+✔ Achieved: 85%
+
+---
+
+### 📁 Test Structure
+
+```text
+tests/
+  unit/
+    test_auth_service.py
+    test_board_service.py
+    test_ticket_service.py
+
+  integration/
+    test_auth.py
+```
+
+---
+
+### 🧠 Key Testing Concepts Used
+
+* Dependency Injection
+* Mocking repositories
+* Isolating business logic
+* Token-based authentication testing
+* End-to-end API validation
+
+---
+
+### ⚠️ Notes
+
+* Each test is **independent**
+* Unique data is used (UUID) to avoid conflicts
+* No real production data is used
+
 
 # Author
 
