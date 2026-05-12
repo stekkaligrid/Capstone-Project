@@ -4,6 +4,7 @@ import uuid
 
 client = TestClient(app)
 
+
 def create_user_get_token():
 
     unique_email = f"test_{uuid.uuid4()}@gmail.com"
@@ -11,24 +12,20 @@ def create_user_get_token():
     register_response = client.post(
         "/register",
         json={
-            "email":unique_email,
-            "password":"123456789",
-            "first_name":"test",
-            "last_name":"user"
+            "email": unique_email,
+            "password": "123456789",
+            "first_name": "test",
+            "last_name": "user",
         }
     )
 
-    # print(register_response.json())
-
     assert register_response.status_code == 200
-
-    # testing login
 
     login_response = client.post(
         "/login",
         json={
-            "email":unique_email,
-            "password":"123456789"
+            "email": unique_email,
+            "password": "123456789",
         }
     )
 
@@ -36,33 +33,27 @@ def create_user_get_token():
 
     return login_response.json()["access_token"]
 
-
 def test_login_success():
 
-    # register testing
     unique_email = f"test_{uuid.uuid4()}@gmail.com"
 
     register_response = client.post(
         "/register",
         json={
-            "email":unique_email,
-            "password":"123456789",
-            "first_name":"test",
-            "last_name":"user"
+            "email": unique_email,
+            "password": "123456789",
+            "first_name": "test",
+            "last_name": "user",
         }
     )
 
-    print(register_response.json())
-
     assert register_response.status_code == 200
-
-    # testing login
 
     login_response = client.post(
         "/login",
         json={
-            "email":unique_email,
-            "password":"123456789"
+            "email": unique_email,
+            "password": "123456789",
         }
     )
 
@@ -75,18 +66,18 @@ def test_login_success():
     assert "access_token" in login_data
     assert login_data["token_type"] == "bearer"
 
-    # testing create_boards
 def test_create_board():
 
     token = create_user_get_token()
 
     board_response = client.post(
         "/boards",
-        json={"name":"Test Board"},
-        headers={"Authorization": f"Bearer {token}"}
+        json={"name": "Test Board"},
+        headers={
+            "Authorization": f"Bearer {token}"
+            }
     )
 
-    print(board_response)
     assert board_response.status_code == 200
 
     board_data = board_response.json()
@@ -96,12 +87,13 @@ def test_create_board():
 def test_get_boards():
 
     token = create_user_get_token()
-
-    headers = {"Authorization" : f"Bearer {token}"}
+    headers = {
+        "Authorization" : f"Bearer {token}"
+        }
 
     client.post(
         "/boards",
-        json={"name":"Board 1"},
+        json={"name": "Board 1"},
         headers=headers
     )
 
@@ -111,22 +103,19 @@ def test_get_boards():
     )
 
     assert get_board.status_code == 200
-
     data = get_board.json()
-
     assert isinstance(data,list)
-
     assert len(data)>=1
 
 def test_create_section():
 
     token = create_user_get_token()
 
-    headers = {"Authorization":f"Bearer {token}"}
+    headers = {"Authorization": f"Bearer {token}"}
 
     board_response = client.post(
         "/boards",
-        json={"name":"Test Board"},
+        json={"name": "Test Board"},
         headers=headers
     )
 
@@ -137,11 +126,11 @@ def test_create_section():
     section_response = client.post(
         f"/boards/{board_id}/sections",
         json={
-            "name":"ToDo",
-            "description":"Test Section"},
+            "name": "ToDo",
+            "description": "Test Section"
+            },
         headers=headers
     )
-
     assert section_response.status_code == 200
 
     data = section_response.json()
@@ -152,11 +141,11 @@ def test_create_ticket():
 
     token = create_user_get_token()
 
-    headers = {"Authorization":f"Bearer {token}"}
+    headers = {"Authorization": f"Bearer {token}"}
 
     board_response = client.post(
         "/boards",
-        json={"name":"Board 2"},
+        json={"name": "Board 2"},
         headers=headers
     )
 
@@ -166,8 +155,10 @@ def test_create_ticket():
 
     section_response = client.post(
         f"/boards/{board_id}/sections",
-        json={"name":"Todo",
-              "description":"Section testing"},
+        json={
+            "name": "Todo",
+            "description": "Section testing"
+            },
             headers=headers
     )
 
@@ -182,8 +173,8 @@ def test_create_ticket():
     ticket_response = client.post(
         f"/sections/{section_id}/tickets",
         json={
-            "name":"Test name",
-            "description":"Test description"
+            "name": "Test name",
+            "description": "Test description"
         },
         headers=headers
     )
@@ -198,11 +189,11 @@ def test_get_tickets():
 
     token = create_user_get_token()
 
-    headers = {"Authorization":f"Bearer {token}"}
+    headers = {"Authorization": f"Bearer {token}"}
 
     board_response = client.post(
         "/boards",
-        json={"name":"Test Board"},
+        json={"name": "Test Board"},
         headers=headers
     )
 
@@ -213,8 +204,8 @@ def test_get_tickets():
     section_response = client.post(
         f"/boards/{board_id}/sections",
         json={
-            "name":"Todo",
-            "description":"Test Section"
+            "name": "Todo",
+            "description": "Test Section"
         },
         headers=headers
     )
@@ -226,8 +217,8 @@ def test_get_tickets():
     ticket_response = client.post(
         f"/sections/{section_id}/tickets",
         json={
-            "name":"Test Ticket",
-            "description":"Test description"
+            "name": "Test Ticket",
+            "description": "Test description"
         },
         headers=headers
     )
