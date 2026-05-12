@@ -243,13 +243,13 @@ Invited members can:
 
 ---
 
-## 🧪 Testing Guide
+## Testing Guide
 
 This project includes both **unit tests** and **integration tests** to ensure reliability and correctness.
 
 ---
 
-### 🔹 Test Types
+### Test Types
 
 #### 1. Unit Tests
 
