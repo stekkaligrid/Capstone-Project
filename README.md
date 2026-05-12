@@ -245,18 +245,19 @@ Invited members can:
 
 # Testing
 
-Run all tests
-PYTHONPATH=. pytest
-Run with coverage
-PYTHONPATH=. pytest --cov=app
+* Run all tests
+* PYTHONPATH=. pytest
+* Run with coverage
+* PYTHONPATH=. pytest --cov=app
 
 ---
 
 # Test Coverage
-Unit Tests → Service layer
-Integration Tests → API endpoints
 
-Total Coverage: 85%
+* Unit Tests → Service layer
+* Integration Tests → API endpoints
+
+* Total Coverage: 85%
 
 ---
 
